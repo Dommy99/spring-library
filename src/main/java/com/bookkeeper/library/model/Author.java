@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Users")
-public class User {
+@Table(name = "Authors")
+public class Author {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)//primary key
@@ -21,10 +21,10 @@ public class User {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)// won't read the data
     private String password;
 
-    public User() {
+    public Author() {
     }
 
-    public User(Long id, String name, String userName, String email, String password) {
+    public Author(Long id, String name, String userName, String email, String password) {
         this.id = id;
         this.name = name;
         this.userName = userName;
