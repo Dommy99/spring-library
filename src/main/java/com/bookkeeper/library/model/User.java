@@ -1,10 +1,24 @@
 package com.bookkeeper.library.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "Users")
 public class User {
+    @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)//primary key
     private Long id;
+    @Column
     private String name;
+    @Column
     private String userName;
+    @Column(unique = true)// unique emails
     private String email;
+    @Column
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)// won't read the data
     private String password;
 
     public User() {
@@ -56,5 +70,16 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", userName='" + userName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }
