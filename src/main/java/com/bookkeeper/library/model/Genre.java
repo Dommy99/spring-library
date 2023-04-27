@@ -1,15 +1,24 @@
 package com.bookkeeper.library.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "genres")// SQL table name
 public class Genre {
+    @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)//primary key
     private Long id;
-    private String name;
+    @Column
+    private String genreName;
 
     public Genre() {
     }
 
-    public Genre(Long id, String name) {
+
+    public Genre(Long id, String genreName) {
         this.id = id;
-        this.name = name;
+        this.genreName = genreName;
     }
 
     public Long getId() {
@@ -20,19 +29,19 @@ public class Genre {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getGenreName() {
+        return genreName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setGenreName(String genreName) {
+        this.genreName = genreName;
     }
 
     @Override
     public String toString() {
         return "Genre{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", genreName='" + genreName + '\'' +
                 '}';
     }
 }
