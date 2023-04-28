@@ -44,27 +44,15 @@ public class BookController {
 
     // http://localhost:9092/api/books/{bookId}
     @GetMapping(path = "/books/{bookId}")
-    public Optional<Book> getCategory(@PathVariable Long bookId) {
-        return bookService.getCategory(bookId);
+    public Optional<Book> getBook(@PathVariable Long bookId) {
+        return bookService.getBook(bookId);
     }
 
     // http://localhost:9092/api/books/{bookId}
     @PutMapping("/books/{bookId}")
     public Book updateBook(@PathVariable(value = "bookId") Long bookId, @RequestBody Book bookObject) {
 
-        Optional<Book> book = bookRepository.findById(bookId);
-        if (book.isPresent()) {
-            if (bookObject.getName().equals(book.get().getName())) {
-                throw new InformationExistException("book " + book.get().getName() + " already exists");
-            } else {
-                Book updateBook = bookRepository.findById(bookId).get();
-                updateBook.setName(bookObject.getName());
-                updateBook.setDescription(bookObject.getDescription());
-                return bookRepository.save(updateBook);
-            }
-        } else {
-            throw new InformationNotFoundException("book with id " + bookId + " not found");
-        }
+        return bookService.updateBook(bookId, bookObject);
     }
 
 
