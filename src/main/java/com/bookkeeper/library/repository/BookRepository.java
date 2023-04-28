@@ -10,5 +10,5 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     Book findByNameAndIdIsNot(String bookName, Long bookId);
 
-    List<Book> findByCategoryId(Long bookId);
+//    List<Book> findByBookId(Long bookId);
 }
