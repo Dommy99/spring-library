@@ -51,4 +51,12 @@ public class Genre {
                 ", genreName='" + genreName + '\'' +
                 '}';
     }
+
+    public List<Book> getBookList() {
+        return bookList;
+    }
+
+    public void setBookList(List<Book> bookList) {
+        this.bookList = bookList;
+    }
 }
