@@ -45,12 +45,7 @@ public class BookController {
     // http://localhost:9092/api/books/{bookId}
     @GetMapping(path = "/books/{bookId}")
     public Optional<Book> getCategory(@PathVariable Long bookId) {
-        Optional<Book> book = bookRepository.findById(bookId);
-        if (book.isPresent()) {
-            return book;
-        } else {
-            throw new InformationNotFoundException("book with id " + bookId + " not found");
-        }
+        return bookService.getCategory(bookId);
     }
 
     // http://localhost:9092/api/books/{bookId}
