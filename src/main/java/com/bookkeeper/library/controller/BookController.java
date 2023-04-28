@@ -1,5 +1,6 @@
 package com.bookkeeper.library.controller;
 
+import com.bookkeeper.library.model.Book;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +13,7 @@ public class BookController {
 
     // http://localhost:9092/api/books/
     @PostMapping("/books/")
-    public String createBook(@RequestBody String body) {
-        return "creating a book " + body;
+    public Book createBook(@RequestBody Book body) {
+        return body;
     }
 }
