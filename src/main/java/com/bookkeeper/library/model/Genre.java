@@ -1,6 +1,10 @@
 package com.bookkeeper.library.model;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "genres")// SQL table name
@@ -12,6 +16,9 @@ public class Genre {
     @Column
     private String genreName;
 
+    @OneToMany(mappedBy = "genre")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Book> bookList;
     public Genre() {
     }
 
