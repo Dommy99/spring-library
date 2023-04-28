@@ -1,5 +1,6 @@
 package com.bookkeeper.library.controller;
 
+import com.bookkeeper.library.exception.InformationExistException;
 import com.bookkeeper.library.model.Book;
 import com.bookkeeper.library.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,14 @@ public class BookController {
 
     // http://localhost:9092/api/books/
     @PostMapping("/books")
-    public Book createBook(@RequestBody Book body) {
-        return body;
+    public Book createBook(@RequestBody Book bookObject) {
+
+        Book book = bookRepository.findByName(bookObject.getName());
+        if (book != null) {
+            throw new InformationExistException("A book with name " + book.getName() + " already exists");
+        } else {
+            return bookRepository.save(bookObject);
+        }
     }
 
     // http://localhost:9092/api/books/
