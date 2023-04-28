@@ -1,8 +1,11 @@
 package com.bookkeeper.library.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "authors")
@@ -20,6 +23,10 @@ public class Author {
     @Column
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)// won't read the data
     private String password;
+
+    @OneToMany(mappedBy = "author")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Book> bookList;
 
     public Author() {
     }

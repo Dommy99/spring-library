@@ -1,5 +1,7 @@
 package com.bookkeeper.library.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -14,6 +16,11 @@ public class Book {
     @Column
     private String description;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
+    private Author author;
+
     public Book() {
     }
 
@@ -22,6 +29,7 @@ public class Book {
         this.name = name;
         this.description = description;
     }
+    // foreignkey connecting to books oneToMany
 
     public Long getId() {
         return id;
