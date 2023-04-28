@@ -35,8 +35,8 @@ public class BookController {
 
     // http://localhost:9092/api/books/
     @GetMapping(path = "/books")
-    public String getBooks() {
-        return "get all books";
+    public List<Book> getBooks() {
+        return bookRepository.findAll();
     }
 
     // http://localhost:9092/api/books/{bookId}
