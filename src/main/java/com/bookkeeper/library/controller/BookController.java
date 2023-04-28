@@ -1,6 +1,8 @@
 package com.bookkeeper.library.controller;
 
 import com.bookkeeper.library.model.Book;
+import com.bookkeeper.library.repository.BookRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -8,6 +10,14 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "/api") // http://localhost:9092/api
 public class BookController {
+
+    private BookRepository bookRepository;
+
+    @Autowired
+    public void setBookRepository(BookRepository bookRepository){
+        this.bookRepository = bookRepository;
+    }
+
 
 
     // http://localhost:9092/api/books/
