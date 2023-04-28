@@ -3,6 +3,7 @@ package com.bookkeeper.library.service;
 import com.bookkeeper.library.exception.InformationExistException;
 import com.bookkeeper.library.exception.InformationNotFoundException;
 import com.bookkeeper.library.model.Book;
+import com.bookkeeper.library.model.Genre;
 import com.bookkeeper.library.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -107,4 +109,6 @@ private BookRepository bookRepository;
             throw new InformationNotFoundException("book with id " + bookId + " not found");
         }
     }
+
+
 }

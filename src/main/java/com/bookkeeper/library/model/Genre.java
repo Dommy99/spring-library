@@ -22,10 +22,10 @@ public class Genre {
     public Genre() {
     }
 
-
-    public Genre(Long id, String genreName) {
+    public Genre(Long id, String genreName, List<Book> bookList) {
         this.id = id;
         this.genreName = genreName;
+        this.bookList = bookList;
     }
 
     public Long getId() {
@@ -59,4 +59,6 @@ public class Genre {
     public void setBookList(List<Book> bookList) {
         this.bookList = bookList;
     }
+
+
 }

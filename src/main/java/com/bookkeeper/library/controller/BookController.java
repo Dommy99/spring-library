@@ -2,6 +2,7 @@ package com.bookkeeper.library.controller;
 
 
 import com.bookkeeper.library.model.Book;
+import com.bookkeeper.library.model.Genre;
 import com.bookkeeper.library.repository.BookRepository;
 import com.bookkeeper.library.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,4 +62,5 @@ public class BookController {
 
         return bookService.deleteBook(bookId);
     }
+
 }
