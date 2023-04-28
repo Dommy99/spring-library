@@ -27,4 +27,10 @@ public class BookController {
     public String getBook(@PathVariable Long bookId) {
         return "getting the book with the id of " + bookId;
     }
+
+    // http://localhost:9092/api/books/{bookId}
+    @PutMapping("/books/{bookId}")
+    public String updateBook(@PathVariable(value = "bookId") Long bookId, @RequestBody String body) {
+        return "updating the book with the id of " + bookId + body;
+    }
 }
