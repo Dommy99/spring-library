@@ -74,7 +74,15 @@ public class BookController {
 
     // http://localhost:9092/api/books/{bookId}
     @DeleteMapping("/books/{bookId}")
-    public String deleteBook(@PathVariable(value = "bookId") Long bookId) {
-        return "deleting the book with the id of " + bookId;
+    public Optional<Book> deleteBook(@PathVariable(value = "bookId") Long bookId) {
+
+        Optional<Book> book = bookRepository.findById(bookId);
+
+        if (book.isPresent()) {
+            bookRepository.deleteById(bookId);
+            return book;
+        } else {
+            throw new InformationNotFoundException("book with id " + bookId + " not found");
+        }
     }
 }
