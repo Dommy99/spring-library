@@ -22,9 +22,11 @@ private BookRepository bookRepository;
     }
 
     /**
+     * Creates a new book.
      *
-     * @param bookObject
-     * @return
+     * @param bookObject The book to be created.
+     * @return The newly created book.
+     * @throws InformationExistException If a book with the same name already exists.
      */
     public Book createBook(@RequestBody Book bookObject) {
 
@@ -37,18 +39,20 @@ private BookRepository bookRepository;
     }
 
     /**
+     * Retrieves all books.
      *
-     *
-     * @return
+     * @return A list of all books.
      */
     public List<Book> getBooks() {
         return bookRepository.findAll();
     }
 
     /**
+     * Retrieves a book by its ID.
      *
-     * @param bookId
-     * @return
+     * @param bookId The ID of the book to be retrieved.
+     * @return An Optional containing the book if found, otherwise an empty Optional.
+     * @throws InformationNotFoundException If the book with the given ID is not found.
      */
     public Optional<Book> getBook(@PathVariable Long bookId) {
         Optional<Book> book = bookRepository.findById(bookId);
@@ -60,10 +64,13 @@ private BookRepository bookRepository;
     }
 
     /**
+     * Updates a book's information.
      *
-     * @param bookId
-     * @param bookObject
-     * @return
+     * @param bookId The ID of the book to be updated.
+     * @param bookObject The updated book information.
+     * @return The updated book.
+     * @throws InformationExistException If the updated book has the same name as the existing book.
+     * @throws InformationNotFoundException If the book with the given ID is not found.
      */
     public Book updateBook(@PathVariable(value = "bookId") Long bookId, @RequestBody Book bookObject) {
 
@@ -83,9 +90,11 @@ private BookRepository bookRepository;
     }
 
     /**
+     * Deletes a book by its ID.
      *
-     * @param bookId
-     * @return
+     * @param bookId The ID of the book to be deleted.
+     * @return An Optional containing the deleted book if found, otherwise an empty Optional.
+     * @throws InformationNotFoundException If the book with the given ID is not found.
      */
     public Optional<Book> deleteBook(@PathVariable(value = "bookId") Long bookId) {
 
