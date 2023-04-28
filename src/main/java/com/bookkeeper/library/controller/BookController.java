@@ -39,7 +39,7 @@ public class BookController {
     // http://localhost:9092/api/books/
     @GetMapping(path = "/books")
     public List<Book> getBooks() {
-        return bookRepository.findAll();
+        return bookService.getBooks();
     }
 
     // http://localhost:9092/api/books/{bookId}
