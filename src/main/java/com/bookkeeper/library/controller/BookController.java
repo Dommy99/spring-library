@@ -33,4 +33,10 @@ public class BookController {
     public String updateBook(@PathVariable(value = "bookId") Long bookId, @RequestBody String body) {
         return "updating the book with the id of " + bookId + body;
     }
+
+    // http://localhost:9092/api/books/{bookId}
+    @DeleteMapping("/books/{bookId}")
+    public String deleteBook(@PathVariable(value = "bookId") Long bookId) {
+        return "deleting the book with the id of " + bookId;
+    }
 }
