@@ -27,7 +27,7 @@ public class AuthorController {
         return authorService.createAuthor(authorObject);
     }
 
-    // http://localhost:9092/auth/users/login/
+    // http://localhost:9092/auth/authors/login/
     @PostMapping("/login/")
     public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest) {
         return authorService.loginUser(loginRequest);

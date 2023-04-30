@@ -7,6 +7,7 @@ import com.bookkeeper.library.model.request.LoginRequest;
 import com.bookkeeper.library.repository.AuthorRepository;
 import com.bookkeeper.library.security.JWTUtils;
 import com.bookkeeper.library.security.MyAuthorDetails;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -69,7 +70,7 @@ public class AuthorService {
             final String JWT = jwtUtils.generateJwtToken(myAuthorDetails);
             return ResponseEntity.ok(new LoginResponse(JWT));
         } catch (Exception e) {
-            return ResponseEntity.ok(new LoginResponse("Error : username or password is incorrect"));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponse("Error: username or password is incorrect"));
         }
     }
 }
