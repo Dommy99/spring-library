@@ -28,6 +28,12 @@ public class GenreService {
         this.genreRepository = genreRepository;
     }
 
+    /**
+     *
+     * @param bookId
+     * @param genreObject
+     * @return
+     */
     public Genre createBookGenre(Long bookId, @RequestBody Genre genreObject) {
         Optional<Book> bookOptional = bookRepository.findById(bookId);
 
@@ -40,6 +46,10 @@ public class GenreService {
         } else {
             throw new InformationNotFoundException("book with id " + bookId + " not found");
         }
+    }
+
+    public List<Genre> getBookGenre(Long bookId){
+        return
     }
 
 }

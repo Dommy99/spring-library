@@ -10,6 +10,8 @@ import com.bookkeeper.library.service.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(path = "/api") // http://localhost:9092/api
 public class GenreController {
@@ -38,7 +40,12 @@ public class GenreController {
     // http://localhost:9092/api/books/{bookId}/genre
     @PostMapping("/books/{bookId}/genre")
     public Genre createBookGenre(@PathVariable(value = "bookId") Long bookId, @RequestBody Genre genreObject) {
-        System.out.println("calling createCategoryRecipe ==>");
         return genreService.createBookGenre(bookId, genreObject);
+    }
+
+    @GetMapping("/books/{bookId}/genre")
+    public List<Genre> getBookGenre(@PathVariable(value = "bookId") Long bookId) {
+
+        return genreService.getBookGenre(bookId);
     }
 }
