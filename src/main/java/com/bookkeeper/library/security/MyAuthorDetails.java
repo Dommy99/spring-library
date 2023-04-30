@@ -5,17 +5,19 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.HashSet;
 
 public class MyAuthorDetails implements UserDetails {
     
     private final Author author;
 
     public MyAuthorDetails(Author author) {
+        this.author = author;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return new HashSet<>();
     }
 
     @Override
