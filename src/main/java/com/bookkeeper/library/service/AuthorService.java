@@ -3,6 +3,8 @@ package com.bookkeeper.library.service;
 import com.bookkeeper.library.exception.InformationExistException;
 import com.bookkeeper.library.model.Author;
 import com.bookkeeper.library.repository.AuthorRepository;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +25,6 @@ public class AuthorService {
      * @return
      */
     public Author createAuthor(Author authorObject) {
-        System.out.println("service calling createUser ==>");
         if (!authorRepository.existsByEmailAddress(authorObject.getEmail())) {
             authorObject.setPassword(passwordEncoder.encode(authorObject.getPassword()));
             return authorRepository.save(authorObject);
@@ -33,7 +34,7 @@ public class AuthorService {
         }
     }
 
-    public Author findAuthorByEmail(String email){
+    public Author findUserByEmailAddress(String email) {
         return authorRepository.findAuthorByEmail(email);
     }
 }
