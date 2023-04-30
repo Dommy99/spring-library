@@ -58,12 +58,12 @@ public class GenreController {
         return genreService.getAllBooksByGenreId(genreId);
     }
 
-//    @DeleteMapping("/books/{bookId}/genre/{genreId}")
-//    public ResponseEntity<HashMap<String, String>> deleteBookGenre(@PathVariable(value = "bookId") Long bookId, @PathVariable(value = "genreId") Long genreId) {
-//        genreService.deleteBookGenre(bookId,genreId);
-//        HashMap<String, String> responseMessage = new HashMap<>();
-//        responseMessage.put("status", "genre with id: " + genreId + " was successfully deleted.");
-//        return new ResponseEntity<>(responseMessage, HttpStatus.OK);
-//    }
+    @DeleteMapping("/books/{bookId}/genre/{genreId}")
+    public ResponseEntity<HashMap<String, String>> deleteBookGenre(@PathVariable(value = "bookId") Long bookId, @PathVariable(value = "genreId") Long genreId) {
+        genreService.deleteBookGenre(bookId,genreId);
+        HashMap<String, String> responseMessage = new HashMap<>();
+        responseMessage.put("status", "genre with id: " + genreId + " was successfully deleted.");
+        return new ResponseEntity<>(responseMessage, HttpStatus.OK);
+    }
 
 }
