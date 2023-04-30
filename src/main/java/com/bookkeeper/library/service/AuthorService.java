@@ -26,7 +26,15 @@ public class AuthorService {
     private MyAuthorDetails myAuthorDetails;
     private JWTUtils jwtUtils;
 
-
+    /**
+     * Constructor for the AuthorService class.
+     *
+     * @param authorRepository the AuthorRepository object
+     * @param passwordEncoder the PasswordEncoder object
+     * @param authenticationManager the AuthenticationManager object
+     * @param myAuthorDetails the MyAuthorDetails object
+     * @param jwtUtils the JWTUtils object
+     */
     public AuthorService(AuthorRepository authorRepository, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, MyAuthorDetails myAuthorDetails, JWTUtils jwtUtils) {
         this.authorRepository = authorRepository;
         this.passwordEncoder = passwordEncoder;
