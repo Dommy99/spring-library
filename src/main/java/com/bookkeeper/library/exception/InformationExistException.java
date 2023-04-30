@@ -3,7 +3,7 @@ package com.bookkeeper.library.exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus(HttpStatus.CONFLICT)
+@ResponseStatus(HttpStatus.CONFLICT)// sets HTTP response status to 409 Conflict
 public class InformationExistException extends RuntimeException {
     /**
      * Constructor for InformationExistException
