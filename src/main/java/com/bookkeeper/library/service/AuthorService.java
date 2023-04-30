@@ -17,6 +17,11 @@ public class AuthorService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    /**
+     *
+     * @param authorObject
+     * @return
+     */
     public Author createAuthor(Author authorObject) {
         System.out.println("service calling createUser ==>");
         if (!authorRepository.existsByEmailAddress(authorObject.getEmail())) {
@@ -26,5 +31,9 @@ public class AuthorService {
             throw new InformationExistException("author with the email address " + authorObject.getEmail() +
                     " already exists");
         }
+    }
+
+    public Author findAuthorByEmail(String email){
+        return authorRepository.findAuthorByEmail(email);
     }
 }

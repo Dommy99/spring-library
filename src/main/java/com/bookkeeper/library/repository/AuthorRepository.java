@@ -10,5 +10,5 @@ public interface AuthorRepository  extends JpaRepository<Author, Long> {
     boolean existsByEmailAddress(String userEmailAddress);
 
     // to login
-    Author findUserByEmailAddress(String userEmailAddress);
+    Author findAuthorByEmail(String userEmailAddress);
 }
