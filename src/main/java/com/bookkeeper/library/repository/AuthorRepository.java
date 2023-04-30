@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AuthorRepository  extends JpaRepository<Author, Long> {
     // to register
-    boolean existsByEmailAddress(String userEmailAddress);
+    boolean existsByEmailAddress(String email);
 
     // to login
-    Author findAuthorByEmail(String userEmailAddress);
+    Author findAuthorByEmail(String email);
 }
