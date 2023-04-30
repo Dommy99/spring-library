@@ -29,8 +29,8 @@ public class BookController {
     }
 
 
-    // http://localhost:9092/api/books/
-    @PostMapping("/books")
+    // http://localhost:9092/api/books
+    @PostMapping(path = "/books")
     public Book createBook(@RequestBody Book bookObject) {
 
         return bookService.createBook(bookObject);
@@ -49,7 +49,7 @@ public class BookController {
     }
 
     // http://localhost:9092/api/books/{bookId}
-    @PutMapping("/books/{bookId}")
+    @PutMapping(path ="/books/{bookId}")
     public Book updateBook(@PathVariable(value = "bookId") Long bookId, @RequestBody Book bookObject) {
 
         return bookService.updateBook(bookId, bookObject);
@@ -57,7 +57,7 @@ public class BookController {
 
 
     // http://localhost:9092/api/books/{bookId}
-    @DeleteMapping("/books/{bookId}")
+    @DeleteMapping(path ="/books/{bookId}")
     public Optional<Book> deleteBook(@PathVariable(value = "bookId") Long bookId) {
 
         return bookService.deleteBook(bookId);
