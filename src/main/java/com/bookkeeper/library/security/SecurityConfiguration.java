@@ -64,5 +64,10 @@ public class SecurityConfiguration {
         return authProvider;
     }
 
-
+    @Bean
+    @Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
+    public MyAuthorDetails myAuthorDetails() {
+        return (MyAuthorDetails) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+    }
 }
