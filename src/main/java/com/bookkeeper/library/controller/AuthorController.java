@@ -1,6 +1,7 @@
 package com.bookkeeper.library.controller;
 
 import com.bookkeeper.library.model.Author;
+import com.bookkeeper.library.model.request.LoginRequest;
 import com.bookkeeper.library.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,5 +27,9 @@ public class AuthorController {
         return authorService.createAuthor(authorObject);
     }
 
-
+    // http://localhost:9092/auth/users/login/
+    @PostMapping("/login/")
+    public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest) {
+        return authorService.loginUser(loginRequest);
+    }
 }
