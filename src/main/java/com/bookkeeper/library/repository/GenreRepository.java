@@ -11,4 +11,5 @@ public interface GenreRepository extends JpaRepository<Genre, Long>{
 //    Genre findByNameAndUserIdAndIdIsNot(String genreName, Long bookId, Long genreId);
 //
 //    Genre findByNameAndUserId(String genreName, Long genreId);
+//    List<Genre> findByGenreId(Long genreId);
 }

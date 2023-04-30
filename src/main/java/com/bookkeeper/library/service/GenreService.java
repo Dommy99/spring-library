@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -50,17 +49,27 @@ public class GenreService {
 
     /**
      * Returns a list of all books belonging to the genre with the specified id.
+     *
      * @param genreId The id of the genre to search for.
      * @return A list of all books belonging to the genre.
      * @throws InformationNotFoundException if the genre with the specified id is not found.
      */
-    public List<Book> getAllBooksByGenreId(Long genreId) {
-        if (genreRepository.existsById(genreId)) {
-            return bookRepository.findByGenre_Id(genreId);
-        } else {
+//    public List<Book> getAllBooksByGenreId(Long genreId) {
+//        if (genreRepository.existsById(genreId)) {
+//            return bookRepository.findByGenre_Id(genreId);
+//        } else {
+//            throw new InformationNotFoundException("genre with id " + genreId + " not found");
+//        }
+//    }
+    public Optional<Genre> getAllBooksByGenreId(Long genreId) {
+        Optional<Genre> genreList = genreRepository.findById(genreId);
+        if (genreList.isEmpty()) {
             throw new InformationNotFoundException("genre with id " + genreId + " not found");
+        } else {
+            return genreList;
         }
     }
+
 
     /**
      * Deletes the genre with the specified id.

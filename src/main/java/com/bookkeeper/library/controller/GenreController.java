@@ -1,11 +1,9 @@
 package com.bookkeeper.library.controller;
 
-import com.bookkeeper.library.exception.InformationExistException;
 import com.bookkeeper.library.model.Book;
 import com.bookkeeper.library.model.Genre;
 import com.bookkeeper.library.repository.BookRepository;
 import com.bookkeeper.library.repository.GenreRepository;
-import com.bookkeeper.library.service.BookService;
 import com.bookkeeper.library.service.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/api") // http://localhost:9092/api
@@ -60,9 +59,11 @@ public class GenreController {
      */
     // http://localhost:9092/api/genres/{genreId}/books
     @GetMapping("/genres/{genreId}/books")
-    public List<Book> getAllBooksByGenreId(@PathVariable(value = "genreId") Long genreId) {
+    public Optional<Genre> getAllBooksByGenreId(@PathVariable(value = "genreId") Long genreId) {
         return genreService.getAllBooksByGenreId(genreId);
     }
+
+
     /**
      * Endpoint for deleting a genre by ID
      *
