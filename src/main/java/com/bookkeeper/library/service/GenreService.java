@@ -25,10 +25,11 @@ public class GenreService {
     }
 
     /**
-     *
-     * @param bookId
-     * @param genreObject
-     * @return
+     * Creates a new genre for the specified book id.
+     * @param bookId The id of the book for which the genre is created.
+     * @param genreObject The genre object to be created.
+     * @return The created genre object.
+     * @throws InformationNotFoundException if the book with the specified id is not found.
      */
     public Genre createBookGenre(Long bookId, @RequestBody Genre genreObject) {
         Optional<Book> bookOptional = bookRepository.findById(bookId);
@@ -48,9 +49,10 @@ public class GenreService {
 
 
     /**
-     *
-     * @param genreId
-     * @return
+     * Returns a list of all books belonging to the genre with the specified id.
+     * @param genreId The id of the genre to search for.
+     * @return A list of all books belonging to the genre.
+     * @throws InformationNotFoundException if the genre with the specified id is not found.
      */
     public List<Book> getAllBooksByGenreId(Long genreId) {
         if (genreRepository.existsById(genreId)) {
@@ -61,8 +63,9 @@ public class GenreService {
     }
 
     /**
-     *
-     * @param genreId
+     * Deletes the genre with the specified id.
+     * @param genreId The id of the genre to be deleted.
+     * @throws InformationNotFoundException if the genre with the specified id is not found.
      */
     public void deleteGenre(Long genreId) {
         Optional<Genre> genreOptional = genreRepository.findById(genreId);
