@@ -34,7 +34,21 @@ public class AuthorService {
         }
     }
 
+    /**
+     *
+     * @param email
+     * @return
+     */
     public Author findUserByEmailAddress(String email) {
+        return authorRepository.findAuthorByEmail(email);
+    }
+
+    /**
+     *
+     * @param email
+     * @return
+     */
+    public Author findAuthorByEmail(String email) {
         return authorRepository.findAuthorByEmail(email);
     }
 }
