@@ -21,6 +21,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Autowired
     private MyAuthorDetailsService myAuthorDetailsService;
+    @Autowired
+    private JWTUtils jwtUtils;
 
     // "Authorization" : "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZW9AYW9sLmNvbSIsImlhdCI6MTY4MjQ1MjU4NywiZXhwIjoxNjgyNTM4OTg3fQ.GtsCdU8VV8MFzTLPuXsQmbs6Nnovbdax0fbU8QDH04U"
     private String parseJwt(HttpServletRequest request) {
