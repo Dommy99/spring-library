@@ -23,7 +23,6 @@ public class Book {
 
     @ManyToOne
     @JoinColumn(name = "genre_id")
-    @JsonIgnore
     private Genre genre;
 
     public Book() {

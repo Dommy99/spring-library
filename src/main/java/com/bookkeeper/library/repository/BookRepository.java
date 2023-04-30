@@ -10,5 +10,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     Book findByNameAndIdIsNot(String bookName, Long bookId);
 
+    List<Book> findByGenre_Id(Long genreId);
+
 //    List<Book> findByBookId(Long bookId);
 }
