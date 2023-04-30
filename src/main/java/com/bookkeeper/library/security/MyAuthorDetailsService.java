@@ -17,7 +17,13 @@ public class MyAuthorDetailsService implements UserDetailsService {
     public void setAuthorService(AuthorService authorService){
         this.authorService = authorService;
     }
-
+    /**
+     * Loads the UserDetails object for a given email.
+     *
+     * @param email the email of the user to load
+     * @return the UserDetails object for the given email
+     * @throws UsernameNotFoundException if the email is not found in the system
+     */
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Author author = authorService.findAuthorByEmail(email);
