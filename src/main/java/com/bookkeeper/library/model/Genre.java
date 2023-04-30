@@ -19,6 +19,8 @@ public class Genre {
     @OneToMany(mappedBy = "genre")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Book> bookList;
+
+
     public Genre() {
     }
 
@@ -59,6 +61,7 @@ public class Genre {
     public void setBookList(List<Book> bookList) {
         this.bookList = bookList;
     }
+
 
 
 }

@@ -16,17 +16,34 @@ public class AuthorController {
 
     private AuthorService authorService;
 
+    /**
+     * Setter method for AuthorService
+     *
+     * @param authorService the author service to set
+     */
     @Autowired
     public void setAuthorService(AuthorService authorService) {
         this.authorService = authorService;
     }
 
+    /**
+     * Endpoint for creating a new author
+     *
+     * @param authorObject the author object to create
+     * @return the created author object
+     */
     // http://localhost:9092/auth/authors/register/
     @PostMapping("/register/")
     public Author createUser(@RequestBody Author authorObject) {
         return authorService.createAuthor(authorObject);
     }
 
+    /**
+     * Endpoint for logging in an author
+     *
+     * @param loginRequest the login request object
+     * @return the response entity containing the logged in author object or an error message
+     */
     // http://localhost:9092/auth/authors/login/
     @PostMapping("/login/")
     public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest) {

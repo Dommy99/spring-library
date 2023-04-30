@@ -19,13 +19,9 @@ public class GenreService {
     private GenreRepository genreRepository;
     private BookRepository bookRepository;
     @Autowired
-    public void setBookRepository(BookRepository bookRepository){
-        this.bookRepository = bookRepository;
-    }
-
-    @Autowired
-    public void setGenreRepository(GenreRepository genreRepository){
+    public GenreService(GenreRepository genreRepository, BookRepository bookRepository) {
         this.genreRepository = genreRepository;
+        this.bookRepository = bookRepository;
     }
 
     /**
@@ -48,9 +44,8 @@ public class GenreService {
         }
     }
 
-//    public List<Genre> getBookGenre(Long bookId){
-//        return
-//    }
+
+
 
     /**
      *
