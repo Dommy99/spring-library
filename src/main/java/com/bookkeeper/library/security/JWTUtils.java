@@ -17,7 +17,12 @@ public class JWTUtils {
 
     @Value("${jwt-expiration-ms}")
     private int jwtExpirationMs;
-
+    /**
+     * Generate JWT Token using user email and set the expiration time
+     *
+     * @param myAuthorDetails User Details object
+     * @return JWT Token
+     */
     public String generateJwtToken(MyAuthorDetails myAuthorDetails) {
         return Jwts.builder()
                 .setSubject((myAuthorDetails.getUsername())) // just the user email
@@ -26,11 +31,21 @@ public class JWTUtils {
                 .signWith(SignatureAlgorithm.HS256, jwtSecret)
                 .compact();
     }
-
+    /**
+     * Extract the user email from the JWT Token
+     *
+     * @param token JWT Token
+     * @return User email
+     */
     public String getUserNameFromJwtToken(String token) {
         return Jwts.parserBuilder().setSigningKey(jwtSecret).build().parseClaimsJws(token).getBody().getSubject();
     }
-
+    /**
+     * Validate if the JWT Token is valid or not
+     *
+     * @param authToken JWT Token
+     * @return true if the JWT Token is valid, false otherwise
+     */
     public boolean validateJwtToken(String authToken) {
         try {
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
