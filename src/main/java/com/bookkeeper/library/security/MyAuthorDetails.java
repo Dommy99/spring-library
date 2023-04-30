@@ -22,7 +22,7 @@ public class MyAuthorDetails implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return author.getPassword();
     }
 
     @Override
