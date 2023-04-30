@@ -52,6 +52,11 @@ public class GenreService {
 //        return
 //    }
 
+    /**
+     *
+     * @param genreId
+     * @return
+     */
     public List<Book> getAllBooksByGenreId(Long genreId) {
         if (genreRepository.existsById(genreId)) {
             return bookRepository.findByGenre_Id(genreId);
@@ -60,6 +65,10 @@ public class GenreService {
         }
     }
 
+    /**
+     *
+     * @param genreId
+     */
     public void deleteGenre(Long genreId) {
         Optional<Genre> genreOptional = genreRepository.findById(genreId);
 
