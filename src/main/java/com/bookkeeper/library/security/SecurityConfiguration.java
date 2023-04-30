@@ -27,17 +27,32 @@ public class SecurityConfiguration {
     public void setMyAuthorDetailsService(MyAuthorDetailsService myAuthorDetailsService) {
         this.myAuthorDetailsService = myAuthorDetailsService;
     }
-
+    /**
+     * Creates a bean for JwtRequestFilter.
+     *
+     * @return JwtRequestFilter instance.
+     */
     @Bean
     public JwtRequestFilter authJwtRequestFilter() {
         return new JwtRequestFilter();
     }
-
+    /**
+     * Creates a bean for BCryptPasswordEncoder.
+     *
+     * @return BCryptPasswordEncoder instance.
+     */
     // register user
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+    /**
+     * Configures the Security Filter Chain.
+     *
+     * @param http HttpSecurity instance.
+     * @return SecurityFilterChain instance.
+     * @throws Exception if there is an error during configuration.
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
@@ -51,12 +66,22 @@ public class SecurityConfiguration {
         http.addFilterBefore(authJwtRequestFilter(), UsernamePasswordAuthenticationFilter.class); // added for JWT login
         return http.build();
     }
-
+    /**
+     * Creates a bean for AuthenticationManager.
+     *
+     * @param authConfig AuthenticationConfiguration instance.
+     * @return AuthenticationManager instance.
+     * @throws Exception if there is an error during configuration.
+     */
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
         return authConfig.getAuthenticationManager();
     }
-
+    /**
+     * Creates a bean for DaoAuthenticationProvider.
+     *
+     * @return DaoAuthenticationProvider instance.
+     */
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -64,7 +89,11 @@ public class SecurityConfiguration {
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }
-
+    /**
+     * Creates a bean for MyAuthorDetails.
+     *
+     * @return MyAuthorDetails instance.
+     */
     @Bean
     @Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
     public MyAuthorDetails myAuthorDetails() {
