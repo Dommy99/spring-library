@@ -3,8 +3,8 @@ package com.bookkeeper.library.service;
 import com.bookkeeper.library.exception.InformationExistException;
 import com.bookkeeper.library.model.Author;
 import com.bookkeeper.library.repository.AuthorRepository;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import com.bookkeeper.library.security.MyAuthorDetails;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +14,15 @@ public class AuthorService {
     private final AuthorRepository authorRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public AuthorService(AuthorRepository authorRepository, PasswordEncoder passwordEncoder) {
+    private AuthenticationManager authenticationManager;
+    private MyAuthorDetails myAuthorDetails;
+
+
+    public AuthorService(AuthorRepository authorRepository, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, MyAuthorDetails myAuthorDetails) {
         this.authorRepository = authorRepository;
         this.passwordEncoder = passwordEncoder;
+        this.authenticationManager = authenticationManager;
+        this.myAuthorDetails = myAuthorDetails;
     }
 
     /**
@@ -34,14 +40,6 @@ public class AuthorService {
         }
     }
 
-    /**
-     *
-     * @param email
-     * @return
-     */
-    public Author findUserByEmailAddress(String email) {
-        return authorRepository.findAuthorByEmail(email);
-    }
 
     /**
      *
@@ -51,4 +49,6 @@ public class AuthorService {
     public Author findAuthorByEmail(String email) {
         return authorRepository.findAuthorByEmail(email);
     }
+
+
 }
