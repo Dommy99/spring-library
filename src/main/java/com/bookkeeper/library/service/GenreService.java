@@ -60,21 +60,17 @@ public class GenreService {
         }
     }
 
-    public void deleteBookGenre(Long bookId, Long genreId) {
-        try {
-            List<Book> books = bookRepository.findByGenre_Id(genreId);
-            Optional<Book> book = books.stream().filter(p -> p.getId().equals(bookId)).findFirst();
+    public void deleteGenre(Long genreId) {
+        Optional<Genre> genreOptional = genreRepository.findById(genreId);
 
-            if (book.isPresent()) {
-                Genre genre = book.get().getGenre();
-                genreRepository.deleteById(genre.getId());
-            } else {
-                throw new InformationNotFoundException("book with id " + bookId + " not found");
-            }
-        } catch (NoSuchElementException e) {
+        if (genreOptional.isPresent()) {
+            genreRepository.deleteById(genreId);
+        } else {
             throw new InformationNotFoundException("genre with id " + genreId + " not found");
         }
     }
+
+
 
 
 }
