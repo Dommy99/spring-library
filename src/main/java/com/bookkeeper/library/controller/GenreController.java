@@ -39,20 +39,36 @@ public class GenreController {
     }
 
 
-
+    /**
+     * Endpoint for creating a new genre for a book
+     *
+     * @param bookId the ID of the book to add the genre to
+     * @param genreObject the genre object to add to the book
+     * @return the created genre object
+     */
     // http://localhost:9092/api/books/{bookId}/genre
     @PostMapping("/books/{bookId}/genre")
     public Genre createBookGenre(@PathVariable(value = "bookId") Long bookId, @RequestBody Genre genreObject) {
         return genreService.createBookGenre(bookId, genreObject);
     }
 
-
+    /**
+     * Endpoint for retrieving all books with a given genre ID
+     *
+     * @param genreId the ID of the genre to retrieve books for
+     * @return a list of all books with the given genre ID
+     */
     // http://localhost:9092/api/genres/{genreId}/books
     @GetMapping("/genres/{genreId}/books")
     public List<Book> getAllBooksByGenreId(@PathVariable(value = "genreId") Long genreId) {
         return genreService.getAllBooksByGenreId(genreId);
     }
-
+    /**
+     * Endpoint for deleting a genre by ID
+     *
+     * @param genreId the ID of the genre to delete
+     * @return a response entity with a status message indicating whether the delete was successful
+     */
     // http://localhost:9092/api/genres/{genreId}
     @DeleteMapping("/genres/{genreId}")
     public ResponseEntity<HashMap<String, String>> deleteGenreById(@PathVariable(value = "genreId") Long genreId) {
