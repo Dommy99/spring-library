@@ -44,13 +44,18 @@ public class AuthorService {
     }
 
     /**
+     * Creates a new author in the database.
      *
-     * @param authorObject
-     * @return
+     * @param authorObject the Author object to be saved
+     * @return the saved Author object
+     * @throws InformationExistException if an author with the same email address already exists
      */
     public Author createAuthor(Author authorObject) {
+        // Check if an author with the same email address already exists
         if (!authorRepository.existsByEmail(authorObject.getEmail())) {
+            // Encode the author's password before saving
             authorObject.setPassword(passwordEncoder.encode(authorObject.getPassword()));
+            // Save the author object in the repository
             return authorRepository.save(authorObject);
         } else {
             throw new InformationExistException("author with the email address " + authorObject.getEmail() +
