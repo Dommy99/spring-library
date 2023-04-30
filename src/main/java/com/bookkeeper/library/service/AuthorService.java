@@ -31,7 +31,7 @@ public class AuthorService {
      * @return
      */
     public Author createAuthor(Author authorObject) {
-        if (!authorRepository.existsByEmailAddress(authorObject.getEmail())) {
+        if (!authorRepository.existsByEmail(authorObject.getEmail())) {
             authorObject.setPassword(passwordEncoder.encode(authorObject.getPassword()));
             return authorRepository.save(authorObject);
         } else {

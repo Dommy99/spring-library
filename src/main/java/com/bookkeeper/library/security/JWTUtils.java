@@ -1,6 +1,5 @@
-package com.bookkeeper.library.service;
+package com.bookkeeper.library.security;
 
-import com.bookkeeper.library.security.MyAuthorDetails;
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,5 @@
-package com.bookkeeper.library.service;
+package com.bookkeeper.library.security;
 
-import com.bookkeeper.library.security.MyAuthorDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -45,7 +44,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 // if valid get user email from the key
                 String username = jwtUtils.getUserNameFromJwtToken(jwt);
                 // load user details from the key
-                UserDetails userDetails = this.myUserDetailsService.loadUserByUsername(username);
+                UserDetails userDetails = this.myAuthorDetailsService.loadUserByUsername(username);
                 // set username and password authentication token from user user details
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         userDetails, null, userDetails.getAuthorities());
