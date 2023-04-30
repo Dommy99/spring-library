@@ -22,7 +22,11 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     private MyAuthorDetailsService myAuthorDetailsService;
     @Autowired
     private JWTUtils jwtUtils;
-
+    /**
+     * This method extracts JWT token from the request header and returns the token.
+     * @param request Incoming HttpServletRequest object
+     * @return JWT token string
+     */
     // "Authorization" : "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZW9AYW9sLmNvbSIsImlhdCI6MTY4MjQ1MjU4NywiZXhwIjoxNjgyNTM4OTg3fQ.GtsCdU8VV8MFzTLPuXsQmbs6Nnovbdax0fbU8QDH04U"
     private String parseJwt(HttpServletRequest request) {
         String headerAuth = request.getHeader("Authorization");
@@ -34,7 +38,15 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         }
         return null;
     }
-
+    /**
+     * This method is responsible for authenticating the user by extracting the JWT token from the request header,
+     * validating it, and setting the user details in the SecurityContext if it is a valid token.
+     * @param request Incoming HttpServletRequest object
+     * @param response Outgoing HttpServletResponse object
+     * @param filterChain FilterChain object
+     * @throws ServletException If an exception occurred that interferes with the filter's normal operation
+     * @throws IOException If an input or output exception occurs
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
