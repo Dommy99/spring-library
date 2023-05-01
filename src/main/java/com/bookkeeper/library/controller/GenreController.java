@@ -50,6 +50,12 @@ public class GenreController {
         return genreService.createBookGenre(bookId, genreObject);
     }
 
+    /**
+     * Endpoint for creating a new book
+     * @param genreId
+     * @param bookObject
+     * @return
+     */
 //     http://localhost:9092/api/genres/{genreId}/books
     @PostMapping("/genres/{genreId}/books")
     public Book createBook(@PathVariable(value = "genreId") Long genreId, @RequestBody Book bookObject) {
