@@ -2,9 +2,12 @@ package com.bookkeeper.library.service;
 
 import com.bookkeeper.library.exception.InformationExistException;
 import com.bookkeeper.library.exception.InformationNotFoundException;
+import com.bookkeeper.library.model.Author;
 import com.bookkeeper.library.model.Book;
 import com.bookkeeper.library.repository.BookRepository;
+import com.bookkeeper.library.security.MyAuthorDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,7 +24,10 @@ private BookRepository bookRepository;
     public void  setBookRepository(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
     }
-
+    public static Author getCurrentLoggedInAuthor() {
+        MyAuthorDetails authorDetails = (MyAuthorDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return authorDetails.getAuthor();
+    }
     /**
      * Creates a new book.
      *
@@ -29,25 +35,38 @@ private BookRepository bookRepository;
      * @return The newly created book.
      * @throws InformationExistException If a book with the same name already exists.
      */
-    public Book createBook(@RequestBody Book bookObject) {
-
-        Book book = bookRepository.findByName(bookObject.getName());
+//    public Book createBook(@RequestBody Book bookObject) {
+//
+//        Book book = bookRepository.findByName(bookObject.getName());
+//        if (book != null) {
+//            throw new InformationExistException("A book with name " + book.getName() + " already exists");
+//        } else {
+//            return bookRepository.save(bookObject);
+//        }
+//    }
+    public Book createBook(Book bookObject) {
+        Book book = bookRepository.findByAuthorIdAndName(BookService.getCurrentLoggedInAuthor().getId(), bookObject.getName());
         if (book != null) {
-            throw new InformationExistException("A book with name " + book.getName() + " already exists");
+            throw new InformationExistException("Book with that name already exists.");
         } else {
+
+            bookObject.setAuthor(getCurrentLoggedInAuthor());
             return bookRepository.save(bookObject);
         }
     }
-
     /**
      * Retrieves all books.
      *
      * @return A list of all books.
      */
     public List<Book> getBooks() {
-        return bookRepository.findAll();
+        List<Book> books = bookRepository.findByAuthorId(BookService.getCurrentLoggedInAuthor().getId());
+        if (books.isEmpty()) {
+            throw new InformationNotFoundException("no books found for author id " + BookService.getCurrentLoggedInAuthor().getId());
+        } else {
+            return books;
+        }
     }
-
     /**
      * Retrieves a book by its ID.
      *
@@ -55,12 +74,20 @@ private BookRepository bookRepository;
      * @return An Optional containing the book if found, otherwise an empty Optional.
      * @throws InformationNotFoundException If the book with the given ID is not found.
      */
-    public Optional<Book> getBook(@PathVariable Long bookId) {
-        Optional<Book> book = bookRepository.findById(bookId);
-        if (book.isPresent()) {
-            return book;
-        } else {
+//    public Optional<Book> getBook(@PathVariable Long bookId) {
+//        Optional<Book> book = bookRepository.findById(bookId);
+//        if (book.isPresent()) {
+//            return book;
+//        } else {
+//            throw new InformationNotFoundException("book with id " + bookId + " not found");
+//        }
+//    }
+    public Optional<Book> getBook(Long bookId) {
+        Book book = bookRepository.findByIdAndAuthorId(bookId, BookService.getCurrentLoggedInAuthor().getId());
+        if (book == null) {
             throw new InformationNotFoundException("book with id " + bookId + " not found");
+        } else {
+            return Optional.of(book);
         }
     }
 
@@ -73,20 +100,35 @@ private BookRepository bookRepository;
      * @throws InformationExistException If the updated book has the same name as the existing book.
      * @throws InformationNotFoundException If the book with the given ID is not found.
      */
-    public Book updateBook(@PathVariable(value = "bookId") Long bookId, @RequestBody Book bookObject) {
-
-        Optional<Book> book = bookRepository.findById(bookId);
-        if (book.isPresent()) {
-            if (bookObject.getName().equals(book.get().getName())) {
-                throw new InformationExistException("book " + book.get().getName() + " already exists");
+//    public Book updateBook(@PathVariable(value = "bookId") Long bookId, @RequestBody Book bookObject) {
+//
+//        Optional<Book> book = bookRepository.findById(bookId);
+//        if (book.isPresent()) {
+//            if (bookObject.getName().equals(book.get().getName())) {
+//                throw new InformationExistException("book " + book.get().getName() + " already exists");
+//            } else {
+//                Book updateBook = bookRepository.findById(bookId).get();
+//                updateBook.setName(bookObject.getName());
+//                updateBook.setDescription(bookObject.getDescription());
+//                return bookRepository.save(updateBook);
+//            }
+//        } else {
+//            throw new InformationNotFoundException("book with id " + bookId + " not found");
+//        }
+//    }
+    public Book updateBook(Long bookId, Book bookObject) {
+        Book book = bookRepository.findByIdAndAuthorId(bookId, BookService.getCurrentLoggedInAuthor().getId());
+        if (book != null) {
+            if (bookObject.getName().equals(book.getName())) {
+                throw new InformationExistException("Book" + book.getName() + " is already exists");
             } else {
-                Book updateBook = bookRepository.findById(bookId).get();
+                Book updateBook = bookRepository.findByIdAndAuthorId(bookId, BookService.getCurrentLoggedInAuthor().getId());
                 updateBook.setName(bookObject.getName());
                 updateBook.setDescription(bookObject.getDescription());
                 return bookRepository.save(updateBook);
             }
         } else {
-            throw new InformationNotFoundException("book with id " + bookId + " not found");
+            throw new InformationNotFoundException("Book with id: " + bookId + "not found");
         }
     }
 

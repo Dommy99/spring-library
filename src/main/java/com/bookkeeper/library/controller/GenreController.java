@@ -51,6 +51,12 @@ public class GenreController {
         return genreService.createBookGenre(bookId, genreObject);
     }
 
+    // http://localhost:9092/api/genres/{genreId}/books
+//    @PostMapping("/genres/{genreId}/books")
+//    public Genre addBooksToGenre(@PathVariable(value = "genreId") Long genreId, @RequestBody List<Long> bookIds) {
+//        return genreService.addBooksToGenre(genreId, bookIds);
+//    }
+
     /**
      * Endpoint for retrieving all books with a given genre ID
      *
@@ -62,6 +68,7 @@ public class GenreController {
     public Optional<Genre> getAllBooksByGenreId(@PathVariable(value = "genreId") Long genreId) {
         return genreService.getAllBooksByGenreId(genreId);
     }
+
 
 
     /**

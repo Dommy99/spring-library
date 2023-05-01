@@ -44,7 +44,21 @@ public class GenreService {
         }
     }
 
-
+//    public Genre addBooksToGenre(Long genreId, List<Long> bookIds) {
+//        Genre genre = genreRepository.findById(genreId)
+//                .orElseThrow(() -> new InformationNotFoundException("Genre with id " + genreId + " not found"));
+//
+//        for (Long bookId : bookIds) {
+//            Book book = bookRepository.findById(bookId)
+//                    .orElseThrow(() -> new InformationNotFoundException("Book with id " + bookId + " not found"));
+//
+//            if (!genre.getBookList().contains(book)) {
+//                genre.getBookList().add(book);
+//            }
+//        }
+//
+//        return genreRepository.save(genre);
+//    }
 
 
     /**
