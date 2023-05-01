@@ -10,10 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
+
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -35,15 +34,7 @@ private BookRepository bookRepository;
      * @return The newly created book.
      * @throws InformationExistException If a book with the same name already exists.
      */
-//    public Book createBook(@RequestBody Book bookObject) {
-//
-//        Book book = bookRepository.findByName(bookObject.getName());
-//        if (book != null) {
-//            throw new InformationExistException("A book with name " + book.getName() + " already exists");
-//        } else {
-//            return bookRepository.save(bookObject);
-//        }
-//    }
+
     public Book createBook(Book bookObject) {
         Book book = bookRepository.findByAuthorIdAndName(BookService.getCurrentLoggedInAuthor().getId(), bookObject.getName());
         if (book != null) {
@@ -74,14 +65,7 @@ private BookRepository bookRepository;
      * @return An Optional containing the book if found, otherwise an empty Optional.
      * @throws InformationNotFoundException If the book with the given ID is not found.
      */
-//    public Optional<Book> getBook(@PathVariable Long bookId) {
-//        Optional<Book> book = bookRepository.findById(bookId);
-//        if (book.isPresent()) {
-//            return book;
-//        } else {
-//            throw new InformationNotFoundException("book with id " + bookId + " not found");
-//        }
-//    }
+
     public Optional<Book> getBook(Long bookId) {
         Book book = bookRepository.findByIdAndAuthorId(bookId, BookService.getCurrentLoggedInAuthor().getId());
         if (book == null) {
@@ -100,22 +84,7 @@ private BookRepository bookRepository;
      * @throws InformationExistException If the updated book has the same name as the existing book.
      * @throws InformationNotFoundException If the book with the given ID is not found.
      */
-//    public Book updateBook(@PathVariable(value = "bookId") Long bookId, @RequestBody Book bookObject) {
-//
-//        Optional<Book> book = bookRepository.findById(bookId);
-//        if (book.isPresent()) {
-//            if (bookObject.getName().equals(book.get().getName())) {
-//                throw new InformationExistException("book " + book.get().getName() + " already exists");
-//            } else {
-//                Book updateBook = bookRepository.findById(bookId).get();
-//                updateBook.setName(bookObject.getName());
-//                updateBook.setDescription(bookObject.getDescription());
-//                return bookRepository.save(updateBook);
-//            }
-//        } else {
-//            throw new InformationNotFoundException("book with id " + bookId + " not found");
-//        }
-//    }
+
     public Book updateBook(Long bookId, Book bookObject) {
         Book book = bookRepository.findByIdAndAuthorId(bookId, BookService.getCurrentLoggedInAuthor().getId());
         if (book != null) {

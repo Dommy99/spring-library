@@ -2,9 +2,11 @@ package com.bookkeeper.library.model;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,6 +22,9 @@ public class Genre {
     @OneToMany(mappedBy = "genre")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Book> bookList;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "author_id")
+    private Author author;
 
 
     public Genre() {
@@ -92,5 +97,15 @@ public class Genre {
     public void setBookList(List<Book> bookList) {
         this.bookList = bookList;
     }
+
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+
 
 }

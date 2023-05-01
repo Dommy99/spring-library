@@ -3,6 +3,9 @@ package com.bookkeeper.library.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 
 import javax.persistence.*;
 import java.util.List;
@@ -31,6 +34,9 @@ public class Author {
     @OneToMany(mappedBy = "author") // specifies that the Book entity has a ManyToOne relationship with the Author entity
     @LazyCollection(LazyCollectionOption.FALSE) // specifies that the bookList field should be eagerly loaded
     private List<Book> bookList;
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Genre> genres;
 
     public Author() {
     }

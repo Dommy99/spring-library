@@ -1,7 +1,6 @@
 package com.bookkeeper.library.security;
 
-import com.bookkeeper.library.security.JwtRequestFilter;
-import com.bookkeeper.library.security.MyAuthorDetailsService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
 import org.springframework.security.authentication.AuthenticationManager;

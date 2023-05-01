@@ -7,9 +7,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface GenreRepository extends JpaRepository<Genre, Long>{
+//    List<Book> findByBookId(Long genreId);
+
+//    Genre findByNameAndAuthorIdAndIdIsNot(String genreName, Long authorId, Long genreId);
 //
-//    Genre findByNameAndUserIdAndIdIsNot(String genreName, Long bookId, Long genreId);
-//
-//    Genre findByNameAndUserId(String genreName, Long genreId);
-//    List<Genre> findByGenreId(Long genreId);
+//    Genre findByNameAndAuthorId(String genreName, Long authorId);
+Genre findByIdAndAuthorId(Long genreId, Long authorId);
+
+
 }

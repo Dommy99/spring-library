@@ -1,11 +1,15 @@
 package com.bookkeeper.library.service;
 
+import com.bookkeeper.library.exception.InformationExistException;
 import com.bookkeeper.library.exception.InformationNotFoundException;
+import com.bookkeeper.library.model.Author;
 import com.bookkeeper.library.model.Book;
 import com.bookkeeper.library.model.Genre;
 import com.bookkeeper.library.repository.BookRepository;
 import com.bookkeeper.library.repository.GenreRepository;
+import com.bookkeeper.library.security.MyAuthorDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -22,6 +26,10 @@ public class GenreService {
         this.genreRepository = genreRepository;
         this.bookRepository = bookRepository;
     }
+    public static Author getCurrentLoggedInAuthor() {
+        MyAuthorDetails authorDetails = (MyAuthorDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return authorDetails.getAuthor();
+    }
 
     /**
      * Creates a new genre for the specified book id.
@@ -31,7 +39,8 @@ public class GenreService {
      * @throws InformationNotFoundException if the book with the specified id is not found.
      */
     public Genre createBookGenre(Long bookId, @RequestBody Genre genreObject) {
-        Optional<Book> bookOptional = bookRepository.findById(bookId);
+        Author currentAuthor = getCurrentLoggedInAuthor();
+        Optional<Book> bookOptional = Optional.ofNullable(bookRepository.findByIdAndAuthorId(bookId, currentAuthor.getId()));
 
         if (bookOptional.isPresent()) {
             Book book = bookOptional.get();
@@ -43,22 +52,17 @@ public class GenreService {
             throw new InformationNotFoundException("book with id " + bookId + " not found");
         }
     }
+    public Book createBook(Long genreId, Book bookObject) {
+        Book book = bookRepository.findByAuthorIdAndName(BookService.getCurrentLoggedInAuthor().getId(), bookObject.getName());
+        if (book != null) {
+            throw new InformationExistException("Book with that name already exists.");
+        } else {
 
-//    public Genre addBooksToGenre(Long genreId, List<Long> bookIds) {
-//        Genre genre = genreRepository.findById(genreId)
-//                .orElseThrow(() -> new InformationNotFoundException("Genre with id " + genreId + " not found"));
-//
-//        for (Long bookId : bookIds) {
-//            Book book = bookRepository.findById(bookId)
-//                    .orElseThrow(() -> new InformationNotFoundException("Book with id " + bookId + " not found"));
-//
-//            if (!genre.getBookList().contains(book)) {
-//                genre.getBookList().add(book);
-//            }
-//        }
-//
-//        return genreRepository.save(genre);
-//    }
+            bookObject.setAuthor(getCurrentLoggedInAuthor());
+            return bookRepository.save(bookObject);
+        }
+    }
+
 
 
     /**
@@ -68,21 +72,19 @@ public class GenreService {
      * @return A list of all books belonging to the genre.
      * @throws InformationNotFoundException if the genre with the specified id is not found.
      */
-//    public List<Book> getAllBooksByGenreId(Long genreId) {
-//        if (genreRepository.existsById(genreId)) {
-//            return bookRepository.findByGenre_Id(genreId);
-//        } else {
-//            throw new InformationNotFoundException("genre with id " + genreId + " not found");
-//        }
-//    }
+
     public Optional<Genre> getAllBooksByGenreId(Long genreId) {
-        Optional<Genre> genreList = genreRepository.findById(genreId);
+        Author currentAuthor = getCurrentLoggedInAuthor();
+        Optional<Genre> genreList = Optional.ofNullable(genreRepository.findByIdAndAuthorId(genreId, currentAuthor.getId()));
+
         if (genreList.isEmpty()) {
-            throw new InformationNotFoundException("genre with id " + genreId + " not found");
+            throw new InformationNotFoundException("genre with id " + genreId + " not found for author with id " );
         } else {
             return genreList;
         }
     }
+
+
 
 
     /**
@@ -91,7 +93,8 @@ public class GenreService {
      * @throws InformationNotFoundException if the genre with the specified id is not found.
      */
     public void deleteGenre(Long genreId) {
-        Optional<Genre> genreOptional = genreRepository.findById(genreId);
+        Author currentAuthor = getCurrentLoggedInAuthor();
+        Optional<Genre> genreOptional = Optional.ofNullable(genreRepository.findByIdAndAuthorId(genreId, currentAuthor.getId()));
 
         if (genreOptional.isPresent()) {
             genreRepository.deleteById(genreId);

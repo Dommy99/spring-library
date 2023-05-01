@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -51,11 +50,11 @@ public class GenreController {
         return genreService.createBookGenre(bookId, genreObject);
     }
 
-    // http://localhost:9092/api/genres/{genreId}/books
-//    @PostMapping("/genres/{genreId}/books")
-//    public Genre addBooksToGenre(@PathVariable(value = "genreId") Long genreId, @RequestBody List<Long> bookIds) {
-//        return genreService.addBooksToGenre(genreId, bookIds);
-//    }
+//     http://localhost:9092/api/genres/{genreId}/books
+    @PostMapping("/genres/{genreId}/books")
+    public Book createBook(@PathVariable(value = "genreId") Long genreId, @RequestBody Book bookObject) {
+        return genreService.createBook(genreId, bookObject);
+    }
 
     /**
      * Endpoint for retrieving all books with a given genre ID
