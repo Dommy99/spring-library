@@ -25,7 +25,8 @@ Then I focused on the model/tables and the relationship between them following t
 making sure the API end points had full CRUD(create, read,update, and delete) functionality. When that was completed I worked on security making some end point private and some public depending on the needs.
 
 Pushing often, keeping to DRY and KISS approaches to code were my main priorities. Taking advantage of feature branches and making docstrings to keep track of code really helped.
-
+![Api.](/src/main/java/com/bookkeeper/library/img/book-library-api.JPG)
+(https://github.com/users/Dommy99/projects/3/views/1)
 ## ToolsAndTech
 - Springboot
 - JPA repository
@@ -35,7 +36,6 @@ Pushing often, keeping to DRY and KISS approaches to code were my main prioritie
 - As a user, I should be able to login or register.
 - As a user, I should be able to create, update, list all(or by id) and delete books.
 - As a user, I should not be able to create, update, list all(or by id) and delete books if I'm not logged.
-- As a user, I should be shown a message when I win, lose or tie.
 
 ![ERD.](/src/main/java/com/bookkeeper/library/img/library%20erd.png)
 
@@ -62,8 +62,7 @@ git clone "add clone text here"
 -[Spring Boot Starter Web](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web/3.0.5)  
 -[PostGres Driver](https://mvnrepository.com/artifact/org.postgresql/postgresql/42.6.0)
 
-![Api.](/src/main/java/com/bookkeeper/library/img/book-library-api.JPG)
-(https://github.com/users/Dommy99/projects/3/views/1)
+## End Points
 
 | Request Type | URL                         | Functionality                              | Access  |
 |--------------|-----------------------------|--------------------------------------------|---------|
