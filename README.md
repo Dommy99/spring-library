@@ -95,3 +95,5 @@ git clone "add clone text here"
 
 ## Credits
 - Shout out to [Kevin-Barrios](https://github.com/dayjyun),[Jeff-Ou](https://github.com/pophero110),[Jay Padilla](https://github.com/Jaypad07),[Obinna Umerah](https://github.com/ObinnaUmerah) & [Maksym-Zinchenko](https://github.com/maklaut007) for help with bug fixes and code reviews.
+- [JAVA API](https://docs.oracle.com/en/java/javase/17/docs/api/index.html)
+- [Spring Framework Documentation](https://docs.spring.io/spring-framework/docs/current/reference/html/)
