@@ -6,7 +6,7 @@
 
 - [Description](#description)
 - [Approach](#approach)
-- [Tools/Tech](#tools/tech)
+- [ToolsAndTech](#toolsAndtech)
 - [User-Story](#user-Story)
 - [Roles](#roles)
     - [Backend](#backEnd)
@@ -14,7 +14,7 @@
     - [Demo](#demo)
     - [Clone](#clone)
 - [Features](#features)
-    - [Hurdles/Unsolved](#hurdles/unsolved)
+    - [HurdlesAndUnsolved](#hurdlesAndunsolved)
 - [Credits](#credits)
 
 ## Description
@@ -26,7 +26,7 @@ making sure the API end points had full CRUD(create, read,update, and delete) fu
 
 Pushing often, keeping to DRY and KISS approaches to code were my main priorities. Taking advantage of feature branches and making docstrings to keep track of code really helped.
 
-## Tools/Tech
+## ToolsAndTech
 - Springboot
 - JPA repository
 - Json Web Tokens
@@ -87,7 +87,7 @@ git clone "add clone text here"
 ### Future Features
 - More tables including book length
 
-## Hurdles/Unsolved
+## HurdlesAndUnsolved
 - Adding security to the api end points
 - Getting full CRUD functionality
 - Adding user authentication to genre
